@@ -37,3 +37,6 @@
 # build artifacts
 Debug/
 Release/
+
+# Project complete placeholder
+done.txt
