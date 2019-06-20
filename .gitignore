@@ -8,10 +8,17 @@
 *.gch
 *.pch
 
+# Debugging
+*.pdb
+
 # Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
+
+# Log files
+*.log
+*.tlog
 
 # Fortran module files
 *.mod
@@ -27,12 +34,15 @@
 *.out
 *.app
 
-# VS 2008 files
+# VS files
+.vs/
 *.ncb
 *.sln
 *.suo
 *.vcproj
+*.vcxproj
 *.vcproj.*
+*.vcxproj.*
 
 # build artifacts
 Debug/
@@ -40,3 +50,6 @@ Release/
 
 # Project complete placeholder
 done.txt
+
+# Exclude Alan Liu's old git repo
+kamyu104/
