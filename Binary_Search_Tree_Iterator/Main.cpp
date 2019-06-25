@@ -2,7 +2,9 @@
 
 // Algorithm:
 // Method 1 (My own solution):
-// Use the iterative traversal solution with the use of Stack.
+// Use the iterative in-order traversal solution with the use of Stack.
+// As next() returns the next smallest number in BST, we need to use in-order
+// traversal to ensure that the nodes visited are ordered in an ascending fashion.
 // Each time next() gets called:
 // 1. We traverse down the left sub-tree path until we find the left-most child, 
 //    pushing the left children into the Stack and breaking the link between the
