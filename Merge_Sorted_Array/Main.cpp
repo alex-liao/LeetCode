@@ -8,7 +8,7 @@
 
 // Method 2 (Refer to Grandyang):
 // Working backwards from the end of :
-// 1. the merged array (end of nums1) 
+// 1. the merged array (end of nums1)
 // 2. the end of valid data in nums1
 // 3. the end of nums2
 // we can insert the elements from nums1 and nums2 in order into the back of nums1
@@ -100,7 +100,7 @@ public:
 				k--;
 			}
 		}
-		
+
 		// there's nothing to do after getting out of the while loop, because if there
 		// are more elements left in nums1, they would be in the correct order and at
 		// the correct indices
