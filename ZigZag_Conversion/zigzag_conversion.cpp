@@ -1,47 +1,60 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 // Problem: ZigZag Conversion
 
-// Status: Unfinished, Debugging
+// Algorithm (My own solution): TBD
 
 using namespace std;
 
 class Solution {
 public:
     string convert(string s, int numRows) {
-        string result = "";
+		string result = "";
 
-        int line = 1;
+		// special case handling for when transformation only has 1 row, just return the original string
+		if (numRows == 1) {
+			return s;
+		}
+
+		// initialize vector of strings to contain empty strings
+		vector<string> lines;	// each index represents the corresponding line after zigzag transformation
+		for (int i = 0; i < numRows; i++) {
+			lines.push_back("");
+		}
+
         int str_len = s.length();
-        while(line <= numRows) {
-            int index = 0;
-            int direction = 1;
-            int on_row = 1;
-            while(index < str_len) {
-                if(on_row == 1 && direction == -1) {
-                    direction = 1;
-                }
-                else if(on_row == numRows && direction == 1) {
-                    direction = -1;
-                }
+		int idx = 0;
+        int direction = 1;	// down is representd by 1, up is represented by -1. We start by going downwards
+        int on_row = 0;	// represents which row we're currently on (from 0 to numRows-1)
+        while(idx < str_len) {
+			lines[on_row] += s[idx];
 
-                if(on_row == line) {
-                    result += s[index];
-                }
-                on_row += direction;
-                index++;
+			// we are back to the first row from rows below, change direction to go down again
+			if(on_row == 0 && direction == -1) {
+                direction = 1;
             }
-            line++;
+			// we reached the bottom row from higher rows up and direction is still going down, change direction to go up
+            else if(on_row == (numRows - 1) && direction == 1) {
+                direction = -1;
+            }
+            on_row += direction;
+			idx++;
         }
+
+		// glue all the lines after zigzag transformation to form the result string
+		for (int i = 0; i < numRows; i++) {
+			result += lines[i];
+		}
 
         return result;
     }
 };
 
 int main() {
-    Solution soln;
-    cout << soln.convert("PAYPALISHIRING", 3) << endl;
+    Solution* soln = new Solution();
+    cout << soln->convert("PAYPALISHIRING", 2) << endl;
 
     return 0;
 }
