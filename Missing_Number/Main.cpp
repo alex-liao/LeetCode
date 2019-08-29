@@ -40,9 +40,14 @@ public:
 // The above XOR operations would result in:
 // 0 XOR missing# => missing#
 
-class Solution {
+class Solution2 {
 public:
 	int missingNumber(vector<int>& nums) {
+		int res = 0;
+		for (int i = 0; i < nums.size(); ++i) {
+			res ^= (i + 1) ^ nums[i];
+		}
 
+		return res;
 	}
 };
