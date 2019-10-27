@@ -27,7 +27,7 @@ class Solution {
 public:
 	vector<vector<int>> levelOrder(TreeNode* root) {
 		vector<vector<int>> res;
-		queue<TreeNode *> q;
+		queue<TreeNode*> q;
 
 		q.push(root);
 
@@ -37,18 +37,23 @@ public:
 			int q_size = q.size();
 			for (int i = 0; i < q_size; i++)
 			{
-				TreeNode *node = q.front();
+				TreeNode* node = q.front();
 				q.pop();
 
 				if (node)
 				{
+					// NOTE: do not confuse the level vector with the queue
+					// push the node's value into level vector
 					level.push_back(node->val);
+					// push the node's child nodes into the queue
 					if (node->left)
 						q.push(node->left);
 					if (node->right)
 						q.push(node->right);
 				}
 			}
+			
+			// shove the completed level into the result vector
 			if (!level.empty())
 				res.push_back(level);
 		}
@@ -69,7 +74,7 @@ public:
 	}
 
 private:
-	void levelOrderRecursion(TreeNode *root, int level, vector<vector<int>> &res)
+	void levelOrderRecursion(TreeNode* root, int level, vector<vector<int>> &res)
 	{
 		if (!root)
 			return;
@@ -88,11 +93,11 @@ private:
 
 int main()
 {
-	TreeNode *root = new TreeNode(1);
+	TreeNode* root = new TreeNode(1);
 	root->left = new TreeNode(2);
 	root->right = new TreeNode(3);
 
-	TreeNode *tmp = root->left;
+	TreeNode* tmp = root->left;
 	tmp->left = new TreeNode(4);
 	tmp->right = new TreeNode(5);
 
