@@ -1,9 +1,3 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
-using namespace std;
-
 // Problem: Remove Element
 
 // Algorithm 1 (My own solution):
@@ -33,6 +27,12 @@ using namespace std;
 //    標示了目前可以被覆蓋的位置。
 // 4. 當 nums[i] 中的值等於我們要排除的值的時候，反而甚麼都不用做，只需要把 index increment 就好。原因是因為慢慢的，該位置
 //	  會被 res 指到，變成等著被覆蓋掉值的位置。
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
 
 class Solution {
 private:
