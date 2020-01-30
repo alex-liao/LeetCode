@@ -47,7 +47,8 @@
 
 using namespace std;
 
-class Solution {
+// Solution 1
+class Solution1 {
 private:
 	void permuteRecursion(vector<vector<int>>& res, vector<int> input, vector<int>& permutation) {
 		if (input.empty()) {
@@ -64,6 +65,47 @@ private:
 			tmp.erase(std::find(tmp.begin(), tmp.end(), *it));
 			// call recursion with the tmp vector (which is a reduced input vector as it is without the element we just picked)
 			permuteRecursion(res, tmp, permutation);
+			// remove the item we just picked from our permutation being built
+			permutation.pop_back();
+		}
+	}
+
+public:
+	vector<vector<int>> permute(vector<int>& nums) {
+		vector<vector<int>> res;
+		vector<int> permutation;
+		permuteRecursion(res, nums, permutation);
+		return res;
+	}
+};
+
+// Solution 2
+// This is an optimization to Solution 1. Instead of copying the entire input array then remove an element from it,
+// we simply preserve the element in a variable and remove it from the input array. The input array is then used for
+// the next recursion call and after the stack unwinds back, we insert the value back to its original place in the
+// vector
+class Solution {
+private:
+	void permuteRecursion(vector<vector<int>>& res, vector<int>& input, vector<int>& permutation) {
+		if (input.empty()) {
+			res.push_back(permutation);
+			return;
+		}
+
+		for (vector<int>::iterator it = input.begin(); it != input.end(); it++) {
+			// pick the element pointed to by the iterator and add it to our permutation that's being built
+			int val = *it;
+			permutation.push_back(val);
+
+			// remove the picked element from input array before passing the input array to next level of recursion
+			input.erase(it);
+
+			// call recursion with the tmp vector (which is a reduced input vector as it is without the element we just picked)
+			permuteRecursion(res, input, permutation);
+
+			// re-insert the removed element back to its original position after the recursion stack unwinds back
+			input.insert(it, val);
+
 			// remove the item we just picked from our permutation being built
 			permutation.pop_back();
 		}
@@ -107,7 +149,7 @@ ostream& operator<<(ostream& os, vector<vector<int>>& v)
 
 int main(int argc, char *argv[])
 {
-	vector<int> input = { 1,2,3,4 };
+	vector<int> input = { 1,2,3 };
 	vector<vector<int>> res = Solution().permute(input);
 
 	cout << res << endl;
